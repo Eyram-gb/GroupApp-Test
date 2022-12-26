@@ -36,16 +36,14 @@
   display: flex;
   gap: 0 10px;
 }
-.add,
-.minus {
-  border: 1px solid rgb(170, 170, 170);
-  padding: 1px 6px;
-  border-radius: 2px;
-}
+
 .info,
 .quantity,
 .total {
   margin-bottom: 10px;
+}
+.remove {
+  cursor: pointer;
 }
 .paymentSummary {
   width: 25vw;

@@ -26,6 +26,11 @@
   top: -10px;
   right: -15px;
 }
+.cardsContainer {
+  display: flex;
+  gap: 25px 40px;
+  flex-wrap: wrap;
+}
 .card {
   background-color: #fff;
   width: 250px;
@@ -44,6 +49,7 @@
 .cardImg {
   padding: 0;
   width: 100%;
+  height: auto;
   object-fit: cover;
   transition: all 0.5s ease-in-out;
 }
@@ -52,9 +58,12 @@
 }
 .cardTitle {
   margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #457b9d;
 }
 .cardDesc {
-  text-align: justify;
+  text-align: left;
   font-size: 12px;
   margin: 8px 0;
 }
@@ -74,11 +83,17 @@
   border: 1px solid #e63946;
   padding: 10px 25px;
   border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+.detailsBtn:hover {
+  background-color: #e63946;
+  color: #fff;
 }
 .cartBtn {
   background-color: #e63946;
   padding: 10px 5px;
   border-radius: 10px;
+  cursor: pointer;
 }
 /* .main {
   display: flex;

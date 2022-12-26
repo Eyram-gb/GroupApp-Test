@@ -5,30 +5,16 @@ import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import NavBar from "../components/navBar";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../store/cartSlice";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [data, setData] = useState();
 
-  /*useEffect(() => {
-    // return () => {
-    //   second
-    // }
-    async function getProducts() {
-      try {
-        const res = await fetch("https://dummyjson.com/products");
-        const { products } = await res.json();
-        setData(products);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getProducts();
-  }, []);
-  */
-
-  //console.log(data);
+  const products = useSelector((state) => state.cart.products);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -44,29 +30,39 @@ export default function Home() {
         <section>
           <h1 className="header">our products</h1>
           <div className={styles.cardsContainer}>
-            <div className={styles.card}>
-              <div className={styles.cardImgContainer}>
-                <img
-                  src="https://img.freepik.com/free-photo/pink-canvas-sneakers-with-polka-dot-unisex-footwear-fashion_53876-106039.jpg?w=2000"
-                  alt="card image"
-                  className={styles.cardImg}
-                />
-              </div>
-              <div className={styles.cardInfo}>
-                <h3 className={styles.cardTitle}>Title</h3>
-                <p className={styles.cardDesc}>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Saepe, libero tempore! Sequi magni deleniti quidem.
-                </p>
-                <p className={styles.cardPrice}>$59</p>
-                <div className={styles.btns}>
-                  <Link href="id" className={styles.detailsBtn}>
-                    More Details
-                  </Link>
-                  <a className={styles.cartBtn}>Cart</a>
+            {products.map((item) => {
+              return (
+                <div className={styles.card} key={item.id}>
+                  <div className={styles.cardImgContainer}>
+                    <img
+                      src={item.images[0]}
+                      alt="card image"
+                      className={styles.cardImg}
+                    />
+                  </div>
+                  <div className={styles.cardInfo}>
+                    <h3 className={styles.cardTitle}>{item.title}</h3>
+                    <p className={styles.cardDesc}>
+                      {item.description.length > 40
+                        ? item.description.slice(0, 40) + "..."
+                        : item.description}
+                    </p>
+                    <p className={styles.cardPrice}>${item.price}</p>
+                    <div className={styles.btns}>
+                      <Link href={`/${item.id}`} className={styles.detailsBtn}>
+                        More Details
+                      </Link>
+                      <a
+                        className={styles.cartBtn}
+                        onClick={() => dispatch(addToCart(item))}
+                      >
+                        🛒
+                      </a>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </section>
       </main>

@@ -1,8 +1,18 @@
 import Head from "next/head";
 import styles from "../styles/checkout.module.css";
 import NavBar from "../components/navBar";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../store/cartSlice";
 
 function Checkout() {
+  // const cc = useSelector((state) => state.cart);
+  // console.log(cc);
+  const cartProducts = useSelector((state) => state.cart.cart);
+  const cartNum = useSelector((state) => state.cart.cartNumber);
+  const grandTotal = useSelector((state) => state.cart.total);
+  // const removeItem = useSelector((state) => state.cart.removeFromCart);
+
+  const dispatch = useDispatch();
   return (
     <>
       <Head>
@@ -17,53 +27,52 @@ function Checkout() {
           <h1>My Cart</h1>
           <div className={styles.checkout}>
             <div className={styles.detailsWrapper}>
-              <div className={styles.productDetails}>
-                <div className={styles.imgContainer}>
-                  <img
-                    src="https://img.freepik.com/free-photo/pink-canvas-sneakers-with-polka-dot-unisex-footwear-fashion_53876-106039.jpg?w=2000"
-                    alt="Product image"
-                    className={styles.img}
-                  />
-                </div>
-                <div className={styles.productInfo}>
-                  <div className={styles.info}>
-                    <p>Title</p>
-                    <p>Remove</p>
+              {cartProducts.map((cartItem) => {
+                return (
+                  <div className={styles.productDetails}>
+                    <div className={styles.imgContainer}>
+                      <img
+                        src={cartItem.images[0]}
+                        alt="Product image"
+                        className={styles.img}
+                      />
+                    </div>
+                    <div className={styles.productInfo}>
+                      <div className={styles.info}>
+                        <p>{cartItem.title}</p>
+                        <p
+                          className={styles.remove}
+                          onClick={() => dispatch(removeFromCart(cartItem))}
+                        >
+                          🗑️
+                        </p>
+                      </div>
+                      <div className={styles.quantity}>
+                        <p>Qty: {cartItem.quantity} </p>
+                      </div>
+                      <div className={styles.info}>
+                        <p>
+                          Price: <span>${cartItem.price}</span>
+                        </p>
+                        <p>
+                          SubToTal: <span>${cartItem.totalPrice}</span>
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div className={styles.quantity}>
-                    <p>Qty:</p>
-                    <p className={styles.minus}>-</p>
-                    <p>5</p>
-                    <p className={styles.add}>+</p>
-                  </div>
-                  <div className={styles.info}>
-                    <p>
-                      Price: <span>$89</span>
-                    </p>
-                    <p>
-                      SubToTal: <span>$781</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
             <div className={styles.paymentSummary}>
               <p className={styles.title}>Order Summary</p>
               <div className={styles.info}>
                 <p>selected Item(s)</p>
-                <p>3</p>
+                <p>{cartNum}</p>
               </div>
-              <div className={styles.info}>
-                <p>Total Price</p>
-                <p>$789</p>
-              </div>
-              <div className={styles.info}>
-                <p>Discount</p>
-                <p>$0</p>
-              </div>
+
               <div className={styles.total}>
                 <p>Grand Total</p>
-                <p>$890</p>
+                <p>$ {grandTotal}</p>
               </div>
               <button href="" className={styles.paymentBtn}>
                 Pay For Items
