@@ -15,7 +15,6 @@ function Detail() {
   let productItem;
   let arr = [];
 
-  console.log(router.query.id);
   useEffect(() => {
     if (!router.isReady) return;
 
@@ -52,13 +51,16 @@ function Detail() {
                       <div className={styles.productInfo}>
                         <h3 className={styles.productTitle}>{item.title}</h3>
                         <p className={styles.productDesc}>{item.description}</p>
+                        <p className={styles.info}>Brand: {item.brand}</p>
+                        <p className={styles.info}>Rating: {item.rating}</p>
                         <p className={styles.productPrice}>${item.price}</p>
+                        {/* <p></p> */}
                         <div className={styles.quantity}></div>
                         <a
                           className={styles.btn}
                           onClick={() => dispatch(addToCart(item))}
                         >
-                          Add To Cart
+                          🛒 Add To Cart
                         </a>
                       </div>
                     </>

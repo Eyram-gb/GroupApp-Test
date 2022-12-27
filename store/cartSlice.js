@@ -26,7 +26,6 @@ const cartSlice = createSlice({
         state.cart = [...state.cart, action.payload];
         state.cartNumber = state.cart.length;
         arr = [...arr, action.payload.id];
-        console.log(state.cart);
       } else {
         newQty = newQty + 1;
       }

@@ -7,8 +7,10 @@ function NavBar() {
 
   return (
     <nav className={styles.nav}>
-      <Link href="/">LOGO</Link>
-      <input type="text" placeholder="Search products" />
+      <Link href="/" className={styles.logo}>
+        Shoppy
+      </Link>
+
       <div className={styles.cart}>
         <Link href="/checkout">🛒 Cart</Link>
         <p className={styles.cartNumber}>{cartNum}</p>

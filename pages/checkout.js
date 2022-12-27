@@ -5,12 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart } from "../store/cartSlice";
 
 function Checkout() {
-  // const cc = useSelector((state) => state.cart);
-  // console.log(cc);
   const cartProducts = useSelector((state) => state.cart.cart);
   const cartNum = useSelector((state) => state.cart.cartNumber);
   const grandTotal = useSelector((state) => state.cart.total);
-  // const removeItem = useSelector((state) => state.cart.removeFromCart);
 
   const dispatch = useDispatch();
   return (
@@ -24,7 +21,7 @@ function Checkout() {
       <main>
         <NavBar></NavBar>
         <section>
-          <h1>My Cart</h1>
+          <h1 className="header">{!cartNum ? "Cart Is Empty 😔" : "MyCart"}</h1>
           <div className={styles.checkout}>
             <div className={styles.detailsWrapper}>
               {cartProducts.map((cartItem) => {

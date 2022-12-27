@@ -42,3 +42,8 @@ a {
     background: black;
   } */
 }
+@media (max-width: 600px) {
+  .header {
+    text-align: center;
+  }
+}
