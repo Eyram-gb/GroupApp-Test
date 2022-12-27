@@ -67,3 +67,15 @@
   border-radius: 8px;
   color: #fff;
 }
+
+@media (max-width: 600px) {
+  .checkout {
+    display: block;
+    margin: 0 auto;
+  }
+  .paymentSummary,
+  .productDetails {
+    width: 85vw;
+    margin-bottom: 50px;
+  }
+}

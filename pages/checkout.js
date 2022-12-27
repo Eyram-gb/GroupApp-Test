@@ -26,7 +26,7 @@ function Checkout() {
             <div className={styles.detailsWrapper}>
               {cartProducts.map((cartItem) => {
                 return (
-                  <div className={styles.productDetails}>
+                  <div className={styles.productDetails} key={cartItem.id}>
                     <div className={styles.imgContainer}>
                       <img
                         src={cartItem.images[0]}
